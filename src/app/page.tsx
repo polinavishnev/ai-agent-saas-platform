@@ -40,7 +40,7 @@ export default function HomePage() {
   const handlePricingPlanClick = (planName: string) => {
     trackPricingPlanView(planName)
     if (planName === 'professional') {
-      handleStartTrialClick('pricing_section', 'professional')
+      handleRequestDemoClick('pricing_section', 'professional')
     } else {
       handleContactSalesClick('pricing_section', 'enterprise')
     }
@@ -154,13 +154,13 @@ export default function HomePage() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
-            id="btn-start-free-trial-hero"
-            data-ga-id="start_free_trial"
+            id="btn-request-demo-hero"
+            data-ga-id="request_demo"
             size="lg"
-            onClick={() => trackCTAClick('start_free_trial', 'Start Free Trial', '/hero', () => handleStartTrialClick('hero'))}
+            onClick={() => trackCTAClick('request_demo', 'Request Demo', '/hero', () => handleRequestDemoClick('hero'))}
             className="text-lg px-8"
           >
-            Start Free Trial
+            Request Demo
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
           <Button size="lg" variant="outline" className="text-lg px-8" asChild>
@@ -170,7 +170,7 @@ export default function HomePage() {
           </Button>
         </div>
         <div className="mt-12 text-sm text-slate-500">
-          No credit card required • 14-day free trial • Setup in minutes
+          We will reach out a total of three times during business hours and delete your information if you do not respond.
         </div>
       </section>
 
@@ -272,12 +272,12 @@ export default function HomePage() {
                 </div>
               ))}
               <Button
-                id="btn-start-free-trial-pricing"
-                data-ga-id="start_free_trial"
+                id="btn-request-demo-pricing"
+                data-ga-id="request_demo"
                 className="w-full mt-6"
-                onClick={() => trackCTAClick('start_free_trial', 'Start Free Trial', '/pricing', () => handlePricingPlanClick('professional'))}
+                onClick={() => trackCTAClick('request_demo', 'Request Demo', '/pricing', () => handlePricingPlanClick('professional'))}
               >
-                Start Free Trial
+                Request Demo
               </Button>
             </CardContent>
           </Card>
@@ -330,7 +330,7 @@ export default function HomePage() {
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
             Join hundreds of companies already using AgentPro to deliver exceptional customer experiences.
           </p>
-          <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-100" onClick={() => handleStartTrialClick('cta_section')}>
+          <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-100" onClick={() => handleRequestDemoClick('cta_section')}>
             Get Started Today
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>

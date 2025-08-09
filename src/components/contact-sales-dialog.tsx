@@ -17,8 +17,7 @@ interface ContactSalesDialogProps {
 
 export function ContactSalesDialog({ open, onOpenChange }: ContactSalesDialogProps) {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     email: "",
     company: "",
     phone: "",
@@ -50,8 +49,7 @@ export function ContactSalesDialog({ open, onOpenChange }: ContactSalesDialogPro
     setTimeout(() => {
       setIsSubmitted(false)
       setFormData({
-        firstName: "",
-        lastName: "",
+        fullName: "",
         email: "",
         company: "",
         phone: "",
@@ -99,43 +97,31 @@ export function ContactSalesDialog({ open, onOpenChange }: ContactSalesDialogPro
             Get a personalized demo and see how AgentPro can transform your customer support.
             Our team will reach out within 24 hours.
           </DialogDescription>
+          <div className="mt-3 text-sm text-slate-500">
+            We will reach out a total of three times during business hours and delete your information if you do not respond.
+          </div>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6 mt-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="firstName" className="flex items-center gap-2">
-                <Users className="h-4 w-4" />
-                First Name *
-              </Label>
-              <Input
-                id="firstName"
-                value={formData.firstName}
-                onChange={(e) => handleInputChange("firstName", e.target.value)}
-                placeholder="John"
-                required
-                className="border-slate-300 focus:border-blue-500"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="lastName" className="flex items-center gap-2">
-                Last Name *
-              </Label>
-              <Input
-                id="lastName"
-                value={formData.lastName}
-                onChange={(e) => handleInputChange("lastName", e.target.value)}
-                placeholder="Smith"
-                required
-                className="border-slate-300 focus:border-blue-500"
-              />
-            </div>
+          <div className="space-y-2">
+            <Label htmlFor="fullName" className="flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              Full Name *
+            </Label>
+            <Input
+              id="fullName"
+              value={formData.fullName}
+              onChange={(e) => handleInputChange("fullName", e.target.value)}
+              placeholder="John Smith"
+              required
+              className="border-slate-300 focus:border-blue-500"
+            />
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="email" className="flex items-center gap-2">
               <Mail className="h-4 w-4" />
-              Work Email *
+              Work Email (or provide phone)
             </Label>
             <Input
               id="email"
@@ -143,7 +129,6 @@ export function ContactSalesDialog({ open, onOpenChange }: ContactSalesDialogPro
               value={formData.email}
               onChange={(e) => handleInputChange("email", e.target.value)}
               placeholder="john@company.com"
-              required
               className="border-slate-300 focus:border-blue-500"
             />
           </div>
@@ -152,14 +137,13 @@ export function ContactSalesDialog({ open, onOpenChange }: ContactSalesDialogPro
             <div className="space-y-2">
               <Label htmlFor="company" className="flex items-center gap-2">
                 <Building className="h-4 w-4" />
-                Company *
+                Company (optional)
               </Label>
               <Input
                 id="company"
                 value={formData.company}
                 onChange={(e) => handleInputChange("company", e.target.value)}
                 placeholder="Acme Corp"
-                required
                 className="border-slate-300 focus:border-blue-500"
               />
             </div>
@@ -179,7 +163,7 @@ export function ContactSalesDialog({ open, onOpenChange }: ContactSalesDialogPro
             <div className="space-y-2">
               <Label htmlFor="phone" className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />
-                Phone Number
+                Phone Number (or provide email)
               </Label>
               <Input
                 id="phone"
@@ -238,10 +222,10 @@ export function ContactSalesDialog({ open, onOpenChange }: ContactSalesDialogPro
               id="btn-request-demo-form"
               data-ga-id="request_demo"
               type="submit"
-              disabled={isSubmitting || !formData.firstName || !formData.lastName || !formData.email || !formData.company}
+              disabled={isSubmitting || !formData.fullName || (!formData.email && !formData.phone)}
               className="flex-1"
               onClick={() => {
-                if (!isSubmitting && formData.firstName && formData.lastName && formData.email && formData.company) {
+                if (!isSubmitting && formData.fullName && (formData.email || formData.phone)) {
                   trackCTAClick('request_demo', 'Request Demo', '/contact-form');
                 }
               }}
